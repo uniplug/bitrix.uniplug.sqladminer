@@ -27,7 +27,7 @@ class AdminerBitrix
 	// }
 
 	function name() {
-		return "<a href='".$this->url."' id='h1'>Bitrix</a>";
+		return "<a href='".$this->url."' id='h1'>".GetMessage("UNIPLUG_SQLADMINER_BACK")."</a><br /><small>adminer ver.</small>";
 	}
 
 	function credentials()
