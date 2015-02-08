@@ -15,6 +15,9 @@ function adminer_object() {
 	include_once $_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/uniplug.sqladminer/vendor/plugins/plugin.php";
 	include_once $_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/uniplug.sqladminer/vendor/plugins/bitrix.php";
 	include_once $_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/uniplug.sqladminer/vendor/plugins/dump-zip.php";
+	include_once $_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/uniplug.sqladminer/vendor/plugins/dump-bz2.php";
+	include_once $_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/uniplug.sqladminer/vendor/plugins/dump-date.php";
+	include_once $_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/uniplug.sqladminer/vendor/plugins/dump-json.php";
 	include_once $_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/uniplug.sqladminer/vendor/plugins/version-noverify.php";
 
 	include( $_SERVER['DOCUMENT_ROOT'] . '/bitrix/php_interface/dbconn.php' );
@@ -27,6 +30,9 @@ function adminer_object() {
 
 	$plugins = array(
 		new AdminerDumpZip(),
+		new AdminerDumpBz2(),
+		new AdminerDumpJson(),
+		new AdminerDumpDate(),
 		new AdminerVersionNoverify(),
 		new AdminerBitrix($DBHost, $DBLogin, $DBName, $DBPassword, $APPLICATION->GetCurDir()),
 	);
