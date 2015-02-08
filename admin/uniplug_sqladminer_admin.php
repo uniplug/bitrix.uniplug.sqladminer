@@ -1,8 +1,13 @@
-<?
-require_once( $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_admin_before.php' );
+<?require_once( $_SERVER['DOCUMENT_ROOT'] . '/bitrix/modules/main/include/prolog_admin_before.php' );
+/** @global \CMain $APPLICATION */
+/** @global \CUser $USER */
+/** @global CDatabase $DB */
+
+global $USER;
+global $APPLICATION;
 
 if(!$USER->IsAdmin())
-	$APPLICATION->AuthForm();
+	$APPLICATION->AuthForm("");
 
 IncludeModuleLangFile(__FILE__);
 
@@ -11,7 +16,12 @@ function adminer_object() {
 	include_once $_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/uniplug.sqladminer/vendor/plugins/bitrix.php";
 	include_once $_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/uniplug.sqladminer/vendor/plugins/dump-zip.php";
 	include_once $_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/uniplug.sqladminer/vendor/plugins/version-noverify.php";
+
 	include( $_SERVER['DOCUMENT_ROOT'] . '/bitrix/php_interface/dbconn.php' );
+	/** @var string $DBHost */
+	/** @var string $DBLogin */
+	/** @var string $DBName */
+	/** @var string $DBPassword */
 
 	global $APPLICATION;
 
@@ -19,7 +29,7 @@ function adminer_object() {
 		new AdminerDumpZip(),
 		new AdminerVersionNoverify(),
 		new AdminerBitrix($DBHost, $DBLogin, $DBName, $DBPassword, $APPLICATION->GetCurDir()),
-		);
+	);
 
 	return new AdminerPlugin($plugins);
 }

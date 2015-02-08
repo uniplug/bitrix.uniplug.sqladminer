@@ -1,11 +1,8 @@
 <?
 global $MESS;
-$strPath2Lang = str_replace("\\", "/", __FILE__);
-$strPath2Lang = substr($strPath2Lang, 0, strlen($strPath2Lang)-strlen("/install/index.php"));
-include(GetLangFileName($strPath2Lang."/lang/", "/install/index.php"));
+IncludeModuleLangFile(__FILE__);
 
-Class uniplug_sqladminer extends CModule
-{
+Class uniplug_sqladminer extends CModule {
 	const MODULE_ID = "uniplug.sqladminer";
 	var $MODULE_ID = "uniplug.sqladminer";
 	var $MODULE_VERSION;
@@ -15,11 +12,10 @@ Class uniplug_sqladminer extends CModule
 	var $MODULE_CSS;
 	var $MODULE_GROUP_RIGHTS = "Y";
 
-	function uniplug_sqladminer()
-	{
+	function uniplug_sqladminer() {
 		$arModuleVersion = array();
 
-		include(dirname(__FILE__)."/version.php");
+		include(dirname(__FILE__) . "/version.php");
 
 		$this->MODULE_VERSION = $arModuleVersion["VERSION"];
 		$this->MODULE_VERSION_DATE = $arModuleVersion["VERSION_DATE"];
@@ -32,58 +28,51 @@ Class uniplug_sqladminer extends CModule
 
 	}
 
-	// Install functions
-	function InstallDB()
-	{
+	function InstallDB() {
 		RegisterModule(self::MODULE_ID);
+
 		return true;
 	}
 
-	function InstallFiles()
-	{
-		CopyDirFiles( __DIR__ . '/admin', $_SERVER['DOCUMENT_ROOT'] . '/bitrix/admin' );
-		CopyDirFiles( __DIR__ . '/themes', $_SERVER['DOCUMENT_ROOT'] . '/bitrix/themes', true, true );
+	function InstallFiles() {
+		CopyDirFiles(__DIR__ . '/admin', $_SERVER['DOCUMENT_ROOT'] . '/bitrix/admin');
+		CopyDirFiles(__DIR__ . '/themes', $_SERVER['DOCUMENT_ROOT'] . '/bitrix/themes', true, true);
+
 		return true;
 	}
 
-	function InstallPublic()
-	{
+	function InstallPublic() {
 		return true;
 	}
 
-	function InstallEvents()
-	{
+	function InstallEvents() {
 		CModule::IncludeModule(self::MODULE_ID);
-		// \UniPlug\CEmaiLogin::Enable();
+
 		return true;
 	}
 
-	// UnInstal functions
-	function UnInstallDB($arParams = Array())
-	{
+	function UnInstallDB($arParams = Array()) {
 		UnRegisterModule(self::MODULE_ID);
+
 		return true;
 	}
 
-	function UnInstallFiles()
-	{
-		DeleteDirFiles( __DIR__ . '/admin', $_SERVER['DOCUMENT_ROOT'] . '/bitrix/admin' );
-		DeleteDirFiles( __DIR__ . '/themes', $_SERVER['DOCUMENT_ROOT'] . '/bitrix/themes' );
+	function UnInstallFiles() {
+		DeleteDirFiles(__DIR__ . '/admin', $_SERVER['DOCUMENT_ROOT'] . '/bitrix/admin');
+		DeleteDirFiles(__DIR__ . '/themes', $_SERVER['DOCUMENT_ROOT'] . '/bitrix/themes');
+
 		return true;
 	}
 
-	function UnInstallPublic()
-	{
+	function UnInstallPublic() {
 		return true;
 	}
 
-	function UnInstallEvents()
-	{
+	function UnInstallEvents() {
 		return true;
 	}
 
-	function DoInstall()
-	{
+	function DoInstall() {
 		global $APPLICATION, $step;
 		$keyGoodFiles = $this->InstallFiles();
 		$keyGoodDB = $this->InstallDB();
@@ -91,8 +80,7 @@ Class uniplug_sqladminer extends CModule
 		$keyGoodPublic = $this->InstallPublic();
 	}
 
-	function DoUninstall()
-	{
+	function DoUninstall() {
 		global $APPLICATION, $step;
 		$keyGoodFiles = $this->UnInstallFiles();
 		$keyGoodEvents = $this->UnInstallEvents();
@@ -100,4 +88,3 @@ Class uniplug_sqladminer extends CModule
 		$keyGoodPublic = $this->UnInstallPublic();
 	}
 }
-?>

@@ -1,12 +1,10 @@
-<?php
+<?
 
-class AdminerBitrix
-{
+class AdminerBitrix {
 
 	var $DBHost, $DBLogin, $DBName, $DBPassword, $url;
 
-	function __construct($DBHost, $DBLogin, $DBName, $DBPassword, $url)
-	{
+	function __construct($DBHost, $DBLogin, $DBName, $DBPassword, $url) {
 		$_SESSION['pwds']['server'][$DBHost][$DBLogin] = $DBPassword;
 		$_SESSION['db']['server'][$DBHost][$DBLogin][$DBName] = true;
 
