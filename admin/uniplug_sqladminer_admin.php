@@ -24,5 +24,4 @@ function adminer_object() {
 	return new AdminerPlugin($plugins);
 }
 
-include $_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/uniplug.sqladminer/vendor/adminer-4.1.0-mysql.php";
-?>
+include $_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/uniplug.sqladminer/vendor/adminer-4.2.0-mysql.php";
