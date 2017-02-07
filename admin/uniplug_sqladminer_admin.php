@@ -12,6 +12,12 @@ if ( !$USER->IsAdmin() ) {
 
 IncludeModuleLangFile(__FILE__);
 
+if (PHP_MAJOR_VERSION >= 7) {
+	set_error_handler(function ($errno, $errstr) {
+		return strpos($errstr, 'Declaration of') === 0;
+	}, E_WARNING);
+}
+
 function adminer_object() {
 	include_once $_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/uniplug.sqladminer/vendor/plugins/plugin.php";
 	include_once $_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/uniplug.sqladminer/vendor/plugins/bitrix.php";
