@@ -24,11 +24,12 @@ function adminer_object() {
 	include_once $_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/uniplug.sqladminer/vendor/plugins/dump-json.php";
 	include_once $_SERVER['DOCUMENT_ROOT'] . "/bitrix/modules/uniplug.sqladminer/vendor/plugins/version-noverify.php";
 
-	include($_SERVER['DOCUMENT_ROOT'] . '/bitrix/php_interface/dbconn.php');
-	/** @var string $DBHost */
-	/** @var string $DBLogin */
-	/** @var string $DBName */
-	/** @var string $DBPassword */
+    $arIncSets = include($_SERVER['DOCUMENT_ROOT'] . '/bitrix/.settings.php');
+    $arSets = $arIncSets['connections']['value']['default'];
+    $DBHost = $arSets['host'];
+    $DBLogin = $arSets['login'];
+    $DBPassword = $arSets['password'];
+    $DBName = $arSets['database'];
 
 	global $APPLICATION;
 
